@@ -1,0 +1,12 @@
+{
+  "name": "puppetfinland-nm",
+  "version": "0.1.0",
+  "author": "Puppet-Finland team",
+  "license": "BSD license",
+  "summary": "Manage Network Manager",
+  "source": "https://github.com/Puppet-Finland/nm.git",
+  "project_page": "https://github.com/Puppet-Finland/nm",
+  "dependencies": [
+    { "name": "puppetfinland/ruby", "version_requirement": ">= 0.2.0" }
+  ]
+}
