@@ -24,6 +24,7 @@ details.
 This module has been tested on
 
 * Debian 8 64-bit
+* Fedora 21
 
 It should work on any Linux that has relatively recent version of nmcli. For 
 details see [params.pp](manifests/params.pp).
