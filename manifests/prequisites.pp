@@ -10,5 +10,5 @@ class nm::prequisites inherits nm::params {
     # Ruby versionomy is needed by the $::nm_can_add_connection custom fact. 
     # That fact is used to determine if Network Manager supports adding 
     # connections or not.
-    include ruby::versionomy
+    include ::ruby::versionomy
 }

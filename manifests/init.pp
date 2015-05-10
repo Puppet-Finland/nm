@@ -14,6 +14,9 @@
 #   'no'.
 # [*wifi_connections*]
 #   A hash of nm::connection::wifi resources to realize.
+# [*default_wifi_iface*]
+#   Sets the default value for $ifname in ::nm::connection::wifi defined 
+#   resource. Defaults to 'wlan0'.
 #
 # == Authors
 #
@@ -28,14 +31,15 @@ class nm
     $manage = 'yes',
     $warn = 'yes',
     $wifi_connections = {},
+    $default_wifi_iface = 'wlan0'
 
 ) inherits nm::params
 {
 
 if $manage == 'yes' {
 
-    include nm::prequisites
-    include nm::install
+    include ::nm::prequisites
+    include ::nm::install
 
     if $::nm_can_add_connection == 'True' {
         create_resources('nm::connection::wifi', $wifi_connections)
