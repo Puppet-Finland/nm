@@ -5,13 +5,13 @@
 # == Parameters
 #
 # [*manage*]
-#   Whether to manage Network Manager using Puppet or not. Valid values 'yes' 
-#   (default) and 'no'.
+#   Whether to manage Network Manager using Puppet or not. Valid values true 
+#   (default) and false.
 # [*warn*]
 #   Warn if Network Manager is too old to support some features of this module, 
 #   such as defining WIFI connections. While this feature is arguably useful, it 
-#   will produce possibly unwanted output. Valid values are 'yes' (default) and 
-#   'no'.
+#   will produce possibly unwanted output. Valid values are true (default) and 
+#   false.
 # [*wifi_connections*]
 #   A hash of nm::connection::wifi resources to realize.
 # [*default_wifi_iface*]
@@ -28,23 +28,23 @@
 #
 class nm
 (
-    $manage = 'yes',
-    $warn = 'yes',
-    $wifi_connections = {},
-    $default_wifi_iface = 'wlan0'
+    Boolean $manage = true,
+    Boolean $warn = true,
+    Hash    $wifi_connections = {},
+    String  $default_wifi_iface = 'wlan0'
 
 ) inherits nm::params
 {
 
-if $manage == 'yes' {
+if $manage {
 
     include ::nm::prequisites
     include ::nm::install
 
-    if $::nm_can_add_connection == 'True' {
+    if versioncmp($::nm_version,'0.9.10.0') > 0 {
         create_resources('nm::connection::wifi', $wifi_connections)
     } else {
-        if $warn == 'yes' {
+        if $warn {
             notify { "This version of nmcli (${::nm_version}) does not support adding connections. Please update your version of Network Manager.": }
         }
     }
