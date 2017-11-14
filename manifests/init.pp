@@ -38,7 +38,6 @@ class nm
 
 if $manage {
 
-    include ::nm::prequisites
     include ::nm::install
 
     if versioncmp($::nm_version,'0.9.10.0') > 0 {
